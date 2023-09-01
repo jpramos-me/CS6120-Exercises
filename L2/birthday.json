@@ -31,10 +31,12 @@
           ]
         },
         {
-          "op": "const",
-          "value": 23,
+          "op": "id",
           "dest": "v1",
-          "type": "float"
+          "type": "float",
+          "args": [
+            "c"
+          ]
         },
         {
           "op": "print",
