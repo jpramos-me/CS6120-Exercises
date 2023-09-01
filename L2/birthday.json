@@ -1,0 +1,336 @@
+{
+  "functions": [
+    {
+      "name": "main",
+      "instrs": [
+        {
+          "op": "id",
+          "dest": "v0",
+          "type": "float",
+          "args": [
+            "n"
+          ]
+        },
+        {
+          "op": "call",
+          "dest": "c",
+          "type": "float",
+          "args": [
+            "v0"
+          ],
+          "funcs": [
+            "probability"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "c",
+          "type": "float",
+          "args": [
+            "c"
+          ]
+        },
+        {
+          "op": "const",
+          "value": 23,
+          "dest": "v1",
+          "type": "float"
+        },
+        {
+          "op": "print",
+          "args": [
+            "v1"
+          ]
+        },
+        {
+          "op": "const",
+          "value": 0,
+          "dest": "v2",
+          "type": "int"
+        }
+      ],
+      "args": [
+        {
+          "name": "n",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "name": "probability",
+      "instrs": [
+        {
+          "op": "const",
+          "value": 1,
+          "dest": "v0",
+          "type": "float"
+        },
+        {
+          "op": "id",
+          "dest": "prob",
+          "type": "float",
+          "args": [
+            "v0"
+          ]
+        },
+        {
+          "op": "const",
+          "value": 1,
+          "dest": "v2",
+          "type": "float"
+        },
+        {
+          "op": "id",
+          "dest": "i",
+          "type": "float",
+          "args": [
+            "v2"
+          ]
+        },
+        {
+          "label": "for.cond.1"
+        },
+        {
+          "op": "id",
+          "dest": "v3",
+          "type": "float",
+          "args": [
+            "i"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "v4",
+          "type": "float",
+          "args": [
+            "n"
+          ]
+        },
+        {
+          "op": "flt",
+          "dest": "v5",
+          "type": "bool",
+          "args": [
+            "v3",
+            "v4"
+          ]
+        },
+        {
+          "op": "br",
+          "args": [
+            "v5"
+          ],
+          "labels": [
+            "for.body.1",
+            "for.end.1"
+          ]
+        },
+        {
+          "label": "for.body.1"
+        },
+        {
+          "op": "const",
+          "value": 365,
+          "dest": "v6",
+          "type": "float"
+        },
+        {
+          "op": "id",
+          "dest": "v7",
+          "type": "float",
+          "args": [
+            "i"
+          ]
+        },
+        {
+          "op": "fsub",
+          "dest": "v8",
+          "type": "float",
+          "args": [
+            "v6",
+            "v7"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "log",
+          "type": "float",
+          "args": [
+            "v8"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "v9",
+          "type": "float",
+          "args": [
+            "log"
+          ]
+        },
+        {
+          "op": "const",
+          "value": 365,
+          "dest": "v10",
+          "type": "float"
+        },
+        {
+          "op": "fdiv",
+          "dest": "v11",
+          "type": "float",
+          "args": [
+            "v9",
+            "v10"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "logUpdated",
+          "type": "float",
+          "args": [
+            "v11"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "v12",
+          "type": "float",
+          "args": [
+            "prob"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "v13",
+          "type": "float",
+          "args": [
+            "logUpdated"
+          ]
+        },
+        {
+          "op": "fmul",
+          "dest": "v14",
+          "type": "float",
+          "args": [
+            "v12",
+            "v13"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "prob",
+          "type": "float",
+          "args": [
+            "v14"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "v15",
+          "type": "float",
+          "args": [
+            "i"
+          ]
+        },
+        {
+          "op": "const",
+          "value": 1,
+          "dest": "v16",
+          "type": "float"
+        },
+        {
+          "op": "fadd",
+          "dest": "v17",
+          "type": "float",
+          "args": [
+            "v15",
+            "v16"
+          ]
+        },
+        {
+          "op": "id",
+          "dest": "i",
+          "type": "float",
+          "args": [
+            "v17"
+          ]
+        },
+        {
+          "op": "jmp",
+          "args": [],
+          "labels": [
+            "for.cond.1"
+          ]
+        },
+        {
+          "label": "for.end.1"
+        },
+        {
+          "op": "const",
+          "value": 1,
+          "dest": "v18",
+          "type": "float"
+        },
+        {
+          "op": "id",
+          "dest": "v19",
+          "type": "float",
+          "args": [
+            "prob"
+          ]
+        },
+        {
+          "op": "const",
+          "value": 100,
+          "dest": "v20",
+          "type": "float"
+        },
+        {
+          "op": "fmul",
+          "dest": "v21",
+          "type": "float",
+          "args": [
+            "v19",
+            "v20"
+          ]
+        },
+        {
+          "op": "const",
+          "value": 100,
+          "dest": "v22",
+          "type": "float"
+        },
+        {
+          "op": "fdiv",
+          "dest": "v23",
+          "type": "float",
+          "args": [
+            "v21",
+            "v22"
+          ]
+        },
+        {
+          "op": "fsub",
+          "dest": "v24",
+          "type": "float",
+          "args": [
+            "v18",
+            "v23"
+          ]
+        },
+        {
+          "op": "ret",
+          "args": [
+            "v24"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "n",
+          "type": "float"
+        }
+      ],
+      "type": "float"
+    }
+  ]
+}
