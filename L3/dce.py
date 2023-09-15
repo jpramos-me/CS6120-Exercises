@@ -1,39 +1,48 @@
 import json
-import fileinupt
+import fileinput
 
-def clean_blocks(json):
-  blocks, iterative = [], []
+def clean_blocks(file):
+    blocks, iterative = [], []
 
-  for i in input['instrs']: 
-    iterative.extend(i)
-    if 'op' in i and i['op'] in {'br', 'jump', 'call', 'ret'}:
-      blocks.extend(iterative)
-      iterative = []
+    for i in file['instrs']:
+        iterative.append(i)
+        if 'op' in i and i['op'] in {'br', 'jmp', 'call', 'ret'}:
+            blocks.append(iterative)
+            iterative = []
 
-  if iterative: 
-    blocks.append(iterative)
+    if iterative:
+        blocks.append(iterative)
 
-  return blocks
+    return blocks
 
 def dce(blocks):
-  changed = True
+  state = True
+  while state:
+    optimize = {}
+    for block in blocks:
+      for instr in block:
+        if 'args' in instr:
+          for arg in instr['args']:
+            optimize[arg] = True
 
-  while changed:
-    used = {}
-    for b in blocks:
-      for i in b:
-        if 'args' in i:
-          for arg in i['args']:
-            used[arg] = True
+    for block in blocks:
+      predicate = len(block)
+      block[:] = [instr for instr in block if 'dest' not in instr or instr['dest'] in optimize]
+      state = predicate != len(block)
 
-    for b in blocks:
-      predicate = len(b)
-      b[:] = [i for i in b if 'dest' not in i or i['dest'] in used]
-      changed = predicate != len(b)
+    return list(blocks)
+
 
 if __name__ == "__main__":
-  with open(sys.argv[1]) as file:
-    json = json.load(file)
+  file = ""
+  for line in fileinput.input():
+    file += line
 
-    for f in json["functions"]:
-      f['instrs'] = [i for block in dce(clean_blocks(f)) for i in block]
+  file = json.loads(file)
+
+  for func in file["functions"]:
+    blocks = clean_blocks(func)
+    clean = [inst for block in dce(blocks) for inst in block]
+    func['instrs'] = clean
+
+  print(json.dumps(file, indent=1))
