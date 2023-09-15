@@ -7,7 +7,14 @@ pipeline = [
     "brili -p {args}",
 ]
 
-[runs.myopt]
+[runs.dce]
+pipeline = [
+    "bril2json",
+    "python3 dce.py",
+    "brili -p {args}",
+]
+
+[runs.lvn]
 pipeline = [
     "bril2json",
     "python3 lvn.py",

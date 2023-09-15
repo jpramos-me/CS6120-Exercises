@@ -76,4 +76,4 @@ pascals-row,myopt,139
 sum-bits,baseline,73
 sum-bits,myopt,73
 mod_inv,baseline,558
-mod_inv,myopt,555
+mod_inv,myopt,556
