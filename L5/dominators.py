@@ -194,29 +194,29 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "-dom", dest="dom", default=False, action="store_true", help="print dominator"
+        "-dom", dest="dom", default=False, action="store_true", help="Dominator"
     )
     parser.add_argument(
         "-tree",
         dest="dom_tree",
         default=False,
         action="store_true",
-        help="print dominance tree",
+        help="Dominance tree",
     )
     parser.add_argument(
         "-frontier",
         dest="dom_frontier",
         default=False,
         action="store_true",
-        help="print dominance frontier",
+        help="Dominance frontier",
     )
     parser.add_argument(
         "-worklist",
         dest="dom_worklist",
         default=False,
         action="store_true",
-        help="use worklist algorithm to find dominator",
+        help="Find dominator",
     )
-    parser.add_argument("-d", dest="dir", action="store", type=str, help="json file")
+    parser.add_argument("-d", dest="dir", action="store", type=str, help="Bril file")
     args = parser.parse_args()
     main(args)
