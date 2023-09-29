@@ -4,8 +4,41 @@ import fileinput
 import argparse
 import sys
 
+from collections import OrderedDict
 from form_blocks import form_blocks
 from cfg import *
+
+
+"""
+Pretty printer helpers
+"""
+
+
+def dom_tree_printer(dt):
+    s = OrderedDict()
+    sort = list(dt.keys())
+    sort.sort()
+    for v in sort:
+        l = list(dt[v].succs)
+        l.sort()
+        s[v] = l
+    print(json.dumps(s, indent=1))
+
+
+def printer(dom):
+    s = OrderedDict()
+    sort = list(dom.keys())
+    sort.sort()
+    for v in sort:
+        l = list(dom[v])
+        l.sort()
+        s[v] = l
+    print(json.dumps(s, indent=1))
+
+
+"""
+Dominator algorithm
+"""
 
 
 def worklist(cfg, merge, transfer):
@@ -18,7 +51,7 @@ def worklist(cfg, merge, transfer):
     wl = copy.deepcopy(cfg)
 
     while len(wl) > 0:
-        label = [wl.keys()][0]
+        label = list(wl.keys())[0]
         bb = wl.pop(label)
         bb_in = [outs[label] for label in bb.pred]
         bb_in_merge = merge(bb_in)
@@ -141,11 +174,16 @@ def main(args):
         else:
             dom = find_dom(cfg)
 
+        if dom_print:
+            printer(dom)
+
         if dom_tree:
             tree = find_dom_tree(dom, cfg)
+            dom_tree_printer(dom_tree)
 
         if dom_frontier:
             frontier = find_dom_frontier(dom, cfg)
+            printer(dom_frontier)
 
 
 if __name__ == "__main__":
@@ -154,7 +192,7 @@ if __name__ == "__main__":
         "-dom", dest="dom", default=False, action="store_true", help="print dominator"
     )
     parser.add_argument(
-        "-domtree",
+        "-tree",
         dest="dom_tree",
         default=False,
         action="store_true",
