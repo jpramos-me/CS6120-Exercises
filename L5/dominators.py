@@ -174,8 +174,10 @@ def main(args):
 
         if dom_worklist:
             dom = find_dom_work(cfg)
+            printer(dom)
         else:
             dom = find_dom(cfg)
+            printer(dom)
 
         if dom_print:
             printer(dom)
