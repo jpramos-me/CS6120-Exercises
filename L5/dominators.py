@@ -53,7 +53,7 @@ def worklist(cfg, merge, transfer):
     while len(wl) > 0:
         label = list(wl.keys())[0]
         bb = wl.pop(label)
-        bb_in = [outs[label] for label in bb.pred]
+        bb_in = [out[label] for label in bb.pred]
         bb_in_merge = merge(bb_in)
         bb_out = transfer(bb, bb_in_merge)
         if len(bb_out) != len(out[label]):
