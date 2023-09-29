@@ -184,11 +184,11 @@ def main(args):
 
         if dom_tree:
             tree = find_dom_tree(dom, cfg)
-            dom_tree_printer(dom_tree)
+            dom_tree_printer(tree)
 
         if dom_frontier:
             frontier = find_dom_frontier(dom, cfg)
-            printer(dom_frontier)
+            printer(frontier)
 
 
 if __name__ == "__main__":
