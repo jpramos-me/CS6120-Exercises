@@ -161,8 +161,11 @@ def main(args):
     dom_worklist = args.dom_worklist
     directory = args.dir
 
-    with open(directory, "r") as f:
-        file = json.load(f)
+    if directory is not None:
+        with open(directory, "r") as d:
+            file = json.load(d)
+    else:
+        file = json.load(sys.stdin)
 
     for func in file["functions"]:
         blocks = form_blocks(func["instrs"])
